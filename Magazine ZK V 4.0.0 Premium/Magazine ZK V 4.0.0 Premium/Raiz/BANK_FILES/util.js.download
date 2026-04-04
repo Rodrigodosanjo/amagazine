@@ -1,0 +1,937 @@
+/*
+ * VALIDATION FUNCTION.
+ */
+
+function isAlphanumericKey(event) {
+	var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+	var caract = new RegExp(/[a-z0-9]+$/i);
+	var caract = caract.test(String.fromCharCode(keyCode));
+	
+	if(!caract){
+		keyCode=0;
+		return false;
+	}
+}
+
+function isNumberKey(evt) {
+   var charCode = (evt.which) ? evt.which : event.keyCode
+   if (charCode > 31 && (charCode < 48 || charCode > 57))
+      return false;
+
+   return true;
+}
+
+function isNumeric( value)
+{
+	var reNumeric= new RegExp("^[0-9]+$");
+	return reNumeric.test(value);
+}
+
+function isFloatNumber(number)
+{
+	var re= /^\d+(,\d+|\d*)$/;
+	return re.test(number);
+}
+
+function isTextNumber(value)
+{
+	var re= /^[0-9a-zA-Z????????????????????????]+$/;
+	return re.test(value);
+}
+
+function isAlfaNumeric(value)
+{
+	var re= /^[0-9a-zA-Z]+$/;
+	return re.test(value);
+}
+
+function isAlfa(value)
+{
+	var re= /^[a-zA-Z????????????????????????]+$/;
+	return re.test(String(value));
+}
+
+// verifies if the user input is a Pamcard Number
+function isNumberPamcard(number)
+{
+	var multiplier = 4;
+	var sum = 0;
+	var ind = 0;
+
+	if (number.length < 10)
+	{
+		var zeroAmount = 10 - number.length;
+		for (i=0; i<zeroAmount; i++)
+		{
+			number = "0" + number;
+		}
+	}
+	while (ind < 9)
+	{
+		sum = sum + (number.charAt(ind) * multiplier);
+		if (multiplier != 2)
+		{
+			multiplier = multiplier - 1;
+		}
+		else
+		{
+			if (ind == 2)
+			{
+				multiplier = 7;
+			}
+		}
+		ind = ind + 1;
+	}
+
+	var remain = sum % 11;
+	var digit;
+	if ((remain == 0) || (remain == 1))
+	{
+		digit = 0;
+	}
+	else
+	{
+		digit = 11 - remain;
+	}
+	if (number.charAt(9) != digit)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+function maxLengthDescription(txtArea, tamanho){ 
+	tam = txtArea.value.length;
+	if (tam > tamanho){ 
+		aux = txtArea.value; 
+		txtArea.value = aux.substring(0,tamanho);
+	} 
+}
+
+/*
+ * FORMAT FUNCTION (MÁSCARA).
+ */
+
+//formats cep when user is typing | format - 99999-999 */
+function cepFormat(fld, e)
+{
+	var key = '';
+	var len = 0;
+	var strCheck = '0123456789';
+	var whichCode;
+	
+	if(navigator.appName == "Microsoft Internet Explorer")
+	{
+		whichCode = e.keyCode;
+	} 
+	else
+	{
+		whichCode = e.which;
+	}
+	
+	if (whichCode == 13) return true; // Enter
+	key = String.fromCharCode(whichCode); // Get key value from key code
+
+	if (strCheck.indexOf(key) == -1)
+		return false; // Not a valid key
+		
+	len = fld.value.length;
+	if (len > 8)
+	{
+		return false;
+	}
+	else
+	if (fld.value.indexOf('-') == -1)
+	{
+		if (len == 5)
+		{
+            fld.value = fld.value + '-';
+		}
+	}
+}
+
+/* formats date when user is typing | format - 99/9999 */
+function dateFormat(fld, e)
+{
+	var key = '';
+	var len = 0;
+	var strCheck = '0123456789';
+	var whichCode;
+	
+	if(navigator.appName == "Microsoft Internet Explorer")
+	{
+		whichCode = e.keyCode;
+	} 
+	else
+	{
+		whichCode = e.which;
+	}
+	
+	if (whichCode == 13) return true; // Enter
+	key = String.fromCharCode(whichCode); // Get key value from key code
+
+	if (strCheck.indexOf(key) == -1)
+		return false; // Not a valid key
+		
+	len = fld.value.length;
+	if (len > 7)
+	{
+		return false;
+	}
+	else
+	if (fld.value.indexOf('/') == -1)
+	{
+		if (len == 2)
+		{
+            fld.value = fld.value + '/';
+		}
+	}
+}
+
+/* formats ip when user is typing */
+function ipFormat(fld, e)
+{
+	var key = '';
+	var len = 0;
+	var strCheck = '0123456789.';
+	var whichCode;
+	
+	if(navigator.appName == "Microsoft Internet Explorer")
+	{
+		whichCode = e.keyCode;
+	} 
+	else
+	{
+		whichCode = e.which;
+	}
+	
+	if (whichCode == 13) return true; // Enter
+	key = String.fromCharCode(whichCode); // Get key value from key code
+
+	if (strCheck.indexOf(key) == -1)
+		return false; // Not a valid key
+}
+
+/* formats phoneFormat when user is typing | format - (99)9999-9999 */
+function phoneFormat(Campo, teclapres)
+{
+	var whichCode;
+	
+	if(teclapres.which)
+	{
+		whichCode = teclapres.which;
+	}
+	else if(teclapres.keyCode)
+	{
+		whichCode = teclapres.keyCode;
+	}
+	
+	var strCheck = '0123456789';
+	key = String.fromCharCode(whichCode); // Get key value from whichCode
+	var vr = new String(Campo.value);
+	tam = vr.length;
+	var isOK = false;
+
+	if (strCheck.indexOf(key) != -1)
+	{
+		if (strCheck.indexOf(key) != -1)
+      	{
+      		isOK = true;
+      		if (tam == 0)
+      		{
+      		   Campo.value = Campo.value + '(' ;
+      		}
+            else if (tam == 3)
+            {
+            	Campo.value = Campo.value + ')' ;
+            }
+            else if(tam == 8)
+            {
+            	Campo.value = Campo.value + '-' ;
+            }
+
+      	}
+
+	}
+	return isOK;
+}
+
+//máscara hora formato HH:MM
+function hourFormat(fld, e)
+{
+  var key = '';
+	var len = 0;
+	var strCheck = '0123456789';
+	var whichCode;
+	
+	if(navigator.appName == "Microsoft Internet Explorer")
+	{
+		whichCode = e.keyCode;
+	} 
+	else
+	{
+		whichCode = e.which;
+	}
+	
+	if (whichCode == 13) return true; // Enter
+	key = String.fromCharCode(whichCode); // Get key value from key code
+
+	if (strCheck.indexOf(key) == -1)
+		return false; // Not a valid key
+		
+	len = fld.value.length;
+	if (len > 5)
+	{
+		return false;
+	}
+	else
+	if (fld.value.indexOf(':') == -1)
+	{
+		if (len == 2)
+		{
+            fld.value = fld.value + ':';
+		}
+	}
+}
+
+//máscara hora formato HH:MM:SS    
+function m_HORA_HHMMSS(campo,tammax,tecla) {
+
+	if(typeof(tecla) == 'undefined')
+	var tecla = window.event;
+	var codigo = (tecla.which ? tecla.which : tecla.keyCode ? tecla.keyCode : tecla.charCode);
+	var vr = campo.value;
+	vr = vr.replace( ":", "" );
+	vr = vr.replace( ":", "" );
+	var tam = vr.length;
+	if (tam < tammax) { 
+		tam = vr.length + 1; 
+	}
+	if (codigo == 8) { 
+		tam = tam - 1; 
+	}
+	tam = tam - 1;
+	if ( (tam >= 2) && (tam < 3) ) {
+		vr = vr.substr( 0, tam - 0 ) + ':' + vr.substr( tam - 0, 2 ); 
+	}
+	if ( (tam >= 3) && (tam < 4) ) {
+		vr = vr.substr( 0, tam - 1 ) + ':' + vr.substr( tam - 1, 2 ); 
+	}
+	if (tam == 4) {
+		vr = vr.substr( 0, tam - 2 ) + ':' + vr.substr( tam - 2, 2 ) + ':' + vr.substr( tam - 0, 5 ); 
+	}
+	if (tam == 5) {
+		vr = vr.substr( 0, tam - 3 ) + ':' + vr.substr( tam - 3, 2 ) + ':' + vr.substr( tam - 1, 6 ); 
+	}
+	campo.value = vr;
+}
+
+function currencyFormat(fld, milSep, decSep, TamMax, e)
+{
+   valor_campo = eval(fld);
+   valor_campo = valor_campo.value.length;
+   max_campo = eval(TamMax);
+
+   if (valor_campo < max_campo)
+   {
+      var sep = 0;
+      var key = '';
+      var i = j = 0;
+      var len = len2 = 0;
+      var strCheck = '0123456789';
+      var aux = aux2 = '';
+      var whichCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+      if (whichCode == 13)
+         return true;  // Enter
+      key = String.fromCharCode(whichCode);  // Get key value from key code
+	  if (strCheck.indexOf(key) == -1)
+         return false;  // Not a valid key
+      len = fld.value.length;
+      for(i = 0; i < len; i++)
+         if ((fld.value.charAt(i) != '0') && (fld.value.charAt(i) != decSep))
+            break;
+      aux = '';
+      for(; i < len; i++)
+         if (strCheck.indexOf(fld.value.charAt(i))!=-1)
+            aux += fld.value.charAt(i);
+      aux += key;
+      len = aux.length;
+      if (len == 0)
+         fld.value = '';
+      if (len == 1)
+         fld.value = '0'+ decSep + '0' + aux;
+      if (len == 2)
+         fld.value = '0'+ decSep + aux;
+      if (len > 2)
+      {
+         aux2 = '';
+         for (j = 0, i = len - 3; i >= 0; i--)
+         {
+            if (j == 3)
+            {
+               aux2 += milSep;
+               j = 0;
+            }
+            aux2 += aux.charAt(i);
+            j++;
+         }
+         fld.value = '';
+         len2 = aux2.length;
+         for (i = len2 - 1; i >= 0; i--)
+            fld.value += aux2.charAt(i);
+         fld.value += decSep + aux.substr(len - 2, len);
+      }
+	  return false;
+   }
+   else
+   {
+      return false;
+   }
+}
+
+/* formats nbPamcard when user is typing | format - 999999999-9 */
+function nbPamcardFormat(fld, e)
+{
+	var key = '';
+	var len = 0;
+	var strCheck = '0123456789';
+	var whichCode;
+	
+	if(e.which)
+	{
+		whichCode = e.which;
+	}
+	else if(e.keyCode)
+	{
+		whichCode = e.keyCode;
+	}
+	
+	len = fld.value.length;
+	if (len > 9)
+	{
+		return false;
+	}
+
+	if (whichCode == 13) return true; // Enter
+	key = String.fromCharCode(whichCode); // Get key value from key code
+
+	if (strCheck.indexOf(key) == -1)
+		return false; // Not a valid key
+	else
+		return true;
+}
+
+function cnpjFormat(Campo, teclapres)
+{
+	var whichCode;
+	
+	if(teclapres.which)
+	{
+		whichCode = teclapres.which;
+	}
+	else if(teclapres.keyCode)
+	{
+		whichCode =	teclapres.keyCode;
+	}	
+	
+	var strCheck = '0123456789';
+	key = String.fromCharCode(whichCode); // Get key value from whichCode
+	var vr = new String(Campo.value);
+	vr = vr.replace(".", "");
+	vr = vr.replace(".", "");
+	vr = vr.replace("/", "");
+	vr = vr.replace("-", "");
+	tam = vr.length;
+	var isOK = false;
+
+	if (strCheck.indexOf(key) != -1)
+	{
+		isOK = true;
+		if (tam > 1 && tam < 6)
+			Campo.value = vr.substr(0, tam - 1) + '-' + vr.substr(tam - 1, 1);
+		 else
+		if (tam > 5 && tam < 9)
+			Campo.value = vr.substr(0, tam - 5) + '/' + vr.substr(tam - 5, 4) + '-' + vr.substr(tam - 1, 1);
+		else
+		if (tam > 8 && tam < 12)
+			Campo.value = vr.substr(0, tam - 8) + '.' + vr.substr(tam - 8, 3) + '/' + vr.substr(tam - 5, 4) + '-' + vr.substr(tam - 1, 1);
+		else
+		if (tam > 11 && tam < 14)
+			Campo.value = vr.substr(0, tam - 11) + '.' + vr.substr(tam - 11, 3) + '.' + vr.substr(tam - 8, 3) + '/' + vr.substr(tam - 5, 4) + '-' + vr.substr(tam - 1, 1);
+		else if(tam >= 14)
+		{
+		  isOK = false;
+		}
+			
+	}
+	return isOK;
+}
+
+function cnpjUnformat(cnpj)
+{
+	cnpj = cnpj.replace( ".", "" );
+	cnpj = cnpj.replace( ".", "" );
+	cnpj = cnpj.replace( ".", "" );
+	cnpj = cnpj.replace( ".", "" );
+	cnpj = cnpj.replace( "-", "" );
+	cnpj = cnpj.replace( "/", "" );
+
+	return cnpj;
+}
+
+function cpfFormat(Campo, teclapres)
+{
+	var whichCode;
+	
+	if(teclapres.which)
+	{
+		whichCode = teclapres.which;
+	}
+	else if(teclapres.keyCode)
+	{
+		whichCode = teclapres.keyCode;
+	}
+	
+	var strCheck = '0123456789';
+	key = String.fromCharCode(whichCode); // Get key value from whichCode
+	var vr = new String(Campo.value);
+	tam = vr.length;
+	var isOK = false;
+
+	if (strCheck.indexOf(key) != -1)
+	{
+		if (strCheck.indexOf(key) != -1)
+      	{
+      		isOK = true;
+      		if (tam == 3)
+      		{
+      		   Campo.value = Campo.value + '.' ;
+      		}
+            else if (tam == 7)
+            {
+            	Campo.value = Campo.value + '.' ;
+            }
+            else if(tam == 11)
+            {
+            	Campo.value = Campo.value + '-' ;
+            }
+            else if(tam == 14)
+            {
+            	isOK = false;
+            }
+
+      	}
+
+	}
+	return isOK;
+}
+
+function InscricaoEstadualFormat(Campo, teclapres)
+{
+    var whichCode;
+    
+    if(teclapres.which)
+    {
+    	whichCode = teclapres.which;
+    }
+    else if(teclapres.keyCode)
+    {
+    	whichCode = teclapres.keyCode;
+    }
+    
+	var strCheck = '0123456789';
+	key = String.fromCharCode(whichCode); // Get key value from whichCode
+	var vr = new String(Campo.value);
+	tam = vr.length;
+	var isOK = false;
+
+	if (strCheck.indexOf(key) != -1)
+	{
+		if (strCheck.indexOf(key) != -1)
+      	{
+      		isOK = true;
+      	}
+	}
+	return isOK;
+}
+
+//somente números:
+function v_NR(tecla)
+{
+	if(typeof(tecla) == 'undefined')
+	var tecla = window.event;
+	var codigo = (tecla.which ? tecla.which : tecla.keyCode ? tecla.keyCode : tecla.charCode);
+	// permite números, 8=backspace, 46=del e 9=tab
+	if ( (codigo >= 48 && codigo <= 57) || (codigo >= 96 && codigo <= 105) || codigo == 8 || codigo == 46 || codigo == 9 ){ 
+		return true; 
+	} else { 
+		return false; 
+	}
+}
+
+/*
+ * MODAL PANEL FUNCTION.
+ */
+ 
+function hideContactClient(message) {
+	if (message == null || message == "") {
+		Richfaces.hideModalPanel('modalContact');
+	}
+}
+
+function hideContact(message)
+{
+	if (message == null || message == "") 
+	{
+		Richfaces.hideModalPanel('mpCompanyContact');
+	}
+}
+
+function hideInsertReadingManual(message)
+{
+	if (message == null || message == "") 
+	{
+		Richfaces.hideModalPanel('mpInsertReadingManual');
+	}
+}
+
+function showModalSearchCity() {
+	if (window.getElementByJSFId('state').value != '') {
+		Richfaces.showModalPanel('modalSearchCity',{width:450, top:200, left:200});
+	}
+}
+
+function showModalSearchRoute() {
+	if (window.getElementByJSFId('hddClient').value != null && window.getElementByJSFId('hddClient').value != '') {
+		Richfaces.showModalPanel('modalSearchRoute',{width:450, top:200, left:200});
+	}
+}
+
+function showModalSearchProfile() {
+	if (window.getElementByJSFId('category').value != '') {
+		Richfaces.showModalPanel('modalSearchProfile',{width:450, top:200, left:200});
+	}
+}
+
+function showModalSearchScope() {
+	if (window.getElementByJSFId('category').value != '') {
+		Richfaces.showModalPanel('modalSearchScope',{width:450, top:200, left:200});
+	}
+}
+
+function hideModalSearchScope(modalID) {
+	Richfaces.hideModalPanel(modalID);
+}
+
+function validateCity()
+{
+	var state = getElementByJSFId('uf').value;
+	
+	if(state == null || state == "" || state < 0)
+	{
+		return false;
+	}
+		
+	Richfaces.showModalPanel('modalSearchCity',{width:450, top:200, left:200});
+	
+	return true;
+}
+
+function validateConsumerUnitPanel()
+{
+	var consumerUnit   = getElementByJSFId('hddClient').value;
+	
+	if(consumerUnit == null || consumerUnit == "" || consumerUnit < 0)
+	{
+		return false;
+	}
+		
+	Richfaces.showModalPanel('modalSearchConsumerUnit',{width:450, top:200, left:200});
+	
+	return true;
+}
+
+function validateMeasuringPointPanel()
+{
+	
+	var measuringPoint = getElementByJSFId('hddClient').value;
+	
+	if(measuringPoint == null || measuringPoint == "" || measuringPoint < 0)
+	{
+		return false;
+	}
+		
+	Richfaces.showModalPanel('modalSearchMeasuringPoint',{width:450, top:200, left:200});
+	
+	return true;
+}
+
+/*
+ * CONVERT FUNCTION.
+ */
+ 
+function invertStr(str)
+{
+	var temp="";
+	for (var i=0; i<str.length; i++)
+		temp=str.charAt(i)+temp
+	return temp;
+}
+
+//Formata um n?mero do tipo Monet?rio 1.200,00 para inteiro 120000 
+function parseCurrencyToNumber(value)
+{
+	var temp ="" ; 
+	var charAtIndex; 
+	for (i=0; i< value.length; i++)
+	{
+		charAtIndex = value.charAt(i);
+		if ( charAtIndex == '.')
+		{
+			temp += "";
+			continue;
+		}
+		if ( charAtIndex == ',')
+		{
+			temp += "";
+			continue;
+		}
+		temp += value.charAt(i);
+	}
+
+	return temp;
+}
+
+//Formata um n?mero do tipo inteiro 120000 para formato monet?rio 1.200,00 
+function parseNumberToCurrency(valueFloat)
+{
+	var value = valueFloat.toString();
+	var formatedValue = "";
+    var isDotComaPresent = false;
+	var tam = "";
+
+	tam = value.length;
+	
+	if ( tam <= 2 )
+	{ 
+		if (tam == 1)
+		{ 
+			formatedValue = "0,0" + value ; 
+		}
+		else if (tam == 2)
+		{ 
+			formatedValue = "0," + value ; 
+		}
+		else
+		{
+			formatedValue = "" ; 
+		}
+	}
+
+	if ( (tam > 2) && (tam <= 5) )
+	{
+		formatedValue = value.substr( 0, tam - 2 ) + ',' + value.substr( tam - 2, tam ) ; 
+	}
+	if ( (tam >= 6) && (tam <= 8) )
+	{
+		formatedValue = value.substr( 0, tam - 5 ) + '.' + value.substr( tam - 5, 3 ) + ',' + value.substr( tam - 2, tam ) ; 
+	}
+	if ( (tam >= 9) && (tam <= 11) )
+	{
+		formatedValue = value.substr( 0, tam - 8 ) + '.' + value.substr( tam - 8, 3 ) + '.' + value.substr( tam - 5, 3 ) + ',' + value.substr( tam - 2, tam ) ; 
+	}
+	if ( (tam >= 12) && (tam <= 14) )
+	{
+		formatedValue = value.substr( 0, tam - 11 ) + '.' + value.substr( tam - 11, 3 ) + '.' + value.substr( tam - 8, 3 ) + '.' + value.substr( tam - 5, 3 ) + ',' + value.substr( tam - 2, tam ) ; 
+	}
+	if ( (tam >= 15) && (tam <= 17) )
+	{
+		formatedValue = value.substr( 0, tam - 14 ) + '.' + value.substr( tam - 14, 3 ) + '.' + value.substr( tam - 11, 3 ) + '.' + value.substr( tam - 8, 3 ) + '.' + value.substr( tam - 5, 3 ) + ',' + value.substr( tam - 2, tam ) ;
+	}
+
+	return formatedValue;
+}
+/*
+ * MICELANEUS FUNCTION.
+ */
+
+function removeAllOptions(from) 
+{
+	for (var i=(from.options.length-1); i>=0; i--) 
+	{
+		from.options[i] = null; 
+	} 
+	
+	from.selectedIndex = -1; 
+}
+
+function selectAllOptions(from) 
+{ 
+	for (var i = 0; i< from.options.length; i++)
+	{ 
+		from.options[i].selected = true; 
+	} 
+}
+
+//Limpa os caracteres em branco no come?o e no fim do par?metro.
+function trim(str)
+{ 
+	return String(str).replace(/^\s+/,"").replace(/\s+$/,""); 
+}
+
+//Remove caracteres (arg) de um texto (source).
+function removeStr(source, arg)
+{
+	var ind, tam, values;
+	var dst= String(source);
+	
+	if(!arg || arg.length == 0) 
+	{
+		return dst;
+	}
+	
+	if( typeof arg == "string")
+	{
+		values= new Array(arg);
+	}
+	else
+	{
+		values= arg;
+	}
+	
+	for(var i=0; i< values.length; i++)
+	{
+		tam= String(values[i]).length;
+		while( (ind= dst.indexOf(values[i]))!= -1)
+		{
+			dst= dst.substring(0,ind) + dst.substring(ind + tam);
+		}
+	}
+
+	return dst;
+}
+
+function changeStr(source, strOrig, strDest)
+{
+	var ind;
+	var lastind=0;
+	var lengthOrig= String(strOrig).length;
+	var dst= new String("");
+
+	while( (ind= source.indexOf(strOrig,lastind))!= -1)
+	{
+		dst+= (source.substring(lastind,ind) + strDest);
+		lastind= ind+lengthOrig;
+	}
+
+	dst+= source.substring(lastind);
+
+	return dst;
+}
+
+function repeatStr(source, str, size, direction)
+{
+	var ret= String(source);
+
+	if(!direction) direction= "left";
+
+	while(ret.length < size)
+	{
+		if( String(direction).toLowerCase() == "right")
+			ret+= str;
+		else
+			ret= str + ret;
+	}
+
+	return ret;
+}
+
+//Gera um n?mero rand?mico entre dois n?meros (r1 e r2).
+function random(r1, r2) 
+{
+  if (r2 > r1) 
+	  return (Math.round(Math.random()*(r2-r1))+r1);
+  else 
+	  return (Math.round(Math.random()*(r1-r2))+r2);
+}
+
+function getElementByJSFId(id) {
+	
+	var elements = document.getElementsByTagName('*');
+	
+	for(ii = 0; ii < elements.length; ii++) {
+		eleId = elements[ii].id;
+		if(eleId && eleId.substring(eleId.length - id.length) == id) {
+			return elements[ii];
+		}
+	}
+	return null;	
+}
+
+function setIntermediatePoint(id, value)
+{
+	this.id = id;
+	this.value = value;
+}
+
+//Funcao para setar o focus em qualquer campo do form
+function setInitialFieldFocus(nameForm, nameField)
+{
+
+  var focusControl = document.forms[nameForm].elements[nameField];
+  if (focusControl.type != "hidden" && !focusControl.disabled)
+  {
+     focusControl.focus();
+  }
+}
+
+//Funcao que permiti digitar somente numeros, '.' e ','  
+function numberFormat(fld, e)
+{
+	var key = '';
+	var len = 0;
+	var strCheck = '0123456789.,';
+	var whichCode;
+	
+	if(navigator.appName == "Microsoft Internet Explorer")
+	{
+		whichCode = e.keyCode;
+	} 
+	else
+	{
+		whichCode = e.which;
+	}
+	
+	if (whichCode == 13) return true; // Enter
+	key = String.fromCharCode(whichCode); // Get key value from key code
+
+	if (strCheck.indexOf(key) == -1)
+		return false; // Not a valid key
+}
+
+//Funcao que nao permiti digitar caracteres especiais  
+function characterFormat(fld, e)
+{
+	var key = '';
+	var len = 0;
+	var strCheck = 'abcdefghijklmnopqrstuvwyzABCDEFGHIJKLMNOPQRSTUVWYZ.,/0123456789';
+	var whichCode;
+	
+	if(navigator.appName == "Microsoft Internet Explorer")
+	{
+		whichCode = e.keyCode;
+	} 
+	else
+	{
+		whichCode = e.which;
+	}
+	
+	if (whichCode == 13) return true; // Enter
+	key = String.fromCharCode(whichCode); // Get key value from key code
+
+	if (strCheck.indexOf(key) == -1)
+		return false; // Not a valid key
+}

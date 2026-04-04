@@ -1,0 +1,224 @@
+#geral {width:700px;font:11px Arial, Tahoma, Sans-serif;margin-left:5px;}
+#geral h1 {float:left;font-size:22px;*padding-left:15px;}
+#geral #topo img {float:right;}
+#geral h2 {clear:both;font-size:16px;*padding-left:15px;}
+
+#geral #conteudo, #geral #topo {width:640px;margin:0 auto;}
+
+table {border-collapse:collapse;border-spacing:0;width:100%;}
+
+.rdoConta {
+	position:relative;
+	top:3px;
+}
+#financ {
+  z-index: 9999;  
+  /* top: initial; */
+  position: fixed;
+  top: 25%;
+  /*left: 50%;*/
+  /*margin-top: -50px;*/
+  margin-left: 10px;
+  width: 672px !important;
+  height: 376px !important;
+  background-image: url('../img/672x376_entretela_shopfacil_01.jpg');
+ }
+ 
+ .jqmOverlay {
+  background-color: #000 !important;
+  opacity:0.32 !important;
+}
+
+.backgroundBoleto {	
+	width:735px !important;
+	height: 1008px !important;
+	background-image: url('../img/boletoBradesco.png');
+	background-repeat: no-repeat;
+}
+
+.modalAgenciaConta {
+  /* border: 1px solid blue; */
+  padding: 35px;
+  height: 100%;
+  z-index: 9999;
+  background-color: rgb(255, 255, 255);
+  opacity: .95;
+  display: none;
+}
+
+.btn_naotenhointeresse{background:url(../img/btn_naotenhointeresse.gif) no-repeat left top; width:182px; height:36px; display:block; font-size:14px; font-weight:bold; line-height:45px; text-align:center; color:#000; padding-right:2px; text-decoration:none; cursor:pointer;}
+.btn_verdepois{background:url(../img/btn_verdepois.gif) no-repeat left top; width:117px; height:36px; display:block; font-size:14px; font-weight:bold; line-height:45px; text-align:center; color:#000; padding-right:2px; text-decoration:none; cursor:pointer;}
+.btn_euquero{background:url(../img/btn_euquero.gif) no-repeat left top; width:145px; height:36px; display:block; font-size:14px; font-weight:bold; line-height:45px; text-align:center; color:#000; padding-right:0px; text-decoration:none; cursor:pointer;}
+.btn:hover {background-position:0 -36px;}
+
+.txt-info{color:black !important; font-size: 0.6em !important; white-space: nowrap;}
+
+#d_clip_button{cursor:pointer !important;}
+#d_clip_button:after{content: url('../img/copy.png'); position:relative; top:5px;}
+
+#conteudo-copiado{color:black !important; font-size: 0.6em !important; }
+#conteudo-copiado:before{content: url('../img/ok-icon.png'); position:relative; top:5px;}
+
+
+
+.tableGeral td {border:0;padding:0;font:9px Arial, Tahoma, Sans-serif;vertical-align:top;}
+.tableGeral .tableCont td {border:1px solid #000;border-top:0;padding:4px;}
+
+.tableGeral .tableCont h4 {font-size:9px;padding-top:5px;margin-bottom:0}
+
+.ttlFicha h4 {margin-top:50px;text-align:center;display:block;font-size:9px;}
+.tableGeral .tableCont td strong {display:block;text-align:center;margin-top:3px;}
+.tableGeral .tableCont td strong.left {text-align:left;}
+.tableGeral .tableRight strong {text-align:right !important;}
+
+.tableGeral .tableCont td.first {border-left:0;}
+.tableGeral .tableCont td.last {border-right:0;}
+.tableGeral .tableCont td.bt1 {border-top:1px solid #000;}
+.tableGeral .tableCont td.br1 {border-right:1px solid #000;}
+.tableGeral td.center {text-align:center;}
+
+table td.b0 {border:0 !important;}
+.tableGeral img {display:block;float:left;}
+.tableGeral .codigo, .txtAutenticacao {font-size:12px;font-weight:bold;padding-top:10px;float:right;}
+.tableGeral .cortar {display:block;}
+.tableGeral p {margin:0;}
+.tableGeral .ttlSac, .tableGeral .boxLocal span {display:block;float:left;margin-right:5px;overflow:hidden}
+.tableGeral .boxLocal span {padding-top:2px;margin-right:15px;}
+.tableGeral .boxLocal div {float:left;}
+
+.tableGeral ul {float:left;margin:0;padding:0;}
+.tableGeral li {list-style:none;}
+
+.txtHeaderLojista {font-size:12px;font-weight:bold;padding-top:10px;
+/* float:right; */}
+
+.mt10 {margin-top:10px !important;}
+.mt30 {margin-top:30px !important;}
+.mb15 {margin-bottom: 30px;}
+.mb5 {margin-bottom: 5px;}
+.pt10 {padding-top:10px !important;}
+.bb5 {border-bottom:5px solid #000;margin-bottom:2px;}
+.bb5 td {padding-bottom:5px;}
+.tableGeral .boxDeducoes span {display:block;}
+.tableGeral .boxDeducoes span, .tableGeral .boxInstrucoes p, .tableGeral .boxSacado li {margin-top:2px;}
+
+.red{color:red; font-weight: bold;} 
+
+.none_i{display: none !important;}
+
+.overflow-hidden{overflow: hidden !important;}	
+
+.dvSacado{width:450px !important; overflow:hidden; border:0px solid blue; margin:0px; padding:0px; height:82px;}
+
+div.boxInstrucoes-fixed {
+    width: 440px;    
+    display: block;
+    overflow:hidden;
+    white-space: normal;
+}
+
+
+
+
+@media print {
+    .noPrint{display:none;}
+    body{width:auto !important;}
+    
+    
+    .ie7{*width:90% !important;}
+    .w714IE7{*width:714px !important;}
+
+    #geral{width:100% !important;}
+    .tableGeral{width:100%!important;}
+    
+    .tableBarCode{margin-top:15px !important;width:100% !important;}
+    
+    
+    
+    ul{list-style-type:none;}
+    
+    .comp_boleto{width:100% !important;}
+    
+    .list_infos li.info {width:450px!important;}
+            
+
+    
+    
+    /* COMPROVANTES */
+.header_comprovante,
+.cabecalho_impressao {display:block!important;font-size:1.09em;border-bottom:solid 0px #000000;margin-bottom:15px;}
+.header_comprovante li.item,
+.cabecalho_impressao li.item {width:120px;text-align:left;}
+.list_infos .fGray,
+.list_infos li.item {color:#000000;}
+.novasContas th,
+.novasContas th div {height:auto!important;}
+
+.novasContas th div a {height:auto!important;line-height:120%!important;padding:0!important;}
+.novasContas th div a:hover {background:none!important;}
+    
+    #conteudo {padding:0;}
+	.bto_imprimir {display:none !important;}
+	.box_grayLine_bottom .mb20 {margin-bottom:0 !important;}
+	.box_grayLine_bottom .mt10 {margin-top:0 !important;}
+
+	/* Novo CSS para redução de espaço na impressão */
+	.list_infos li h2 {padding-bottom:0px !important;}
+	.tabSaldosExtratos thead th {font-weight:normal !important;background:#fff!important;vertical-align:middle;border:solid 1px #000 !important;padding:0px 5px;}
+	.tabSaldosExtratos td {padding:2px 5px !important;vertical-align:middle!important;}
+	.lancamentosFuturos , .demonstrativo_rendimentos {margin-bottom:10px !important;}
+	.cabecalho_impressao {display:block!important;font-size:1.09em;border-bottom:solid 1px #000000;margin-bottom:10px;}
+	.sac {border:solid 1px #000000;margin-top:5px;padding:5px 10px;width:auto;font-size:1.09em;color:#000000!important;}
+
+	.headerExtrato {padding:0 !important;}
+	.headerExtrato label,
+	.headerExtrato strong {padding-top:0 !important;}
+	.tabSaldosExtratos {margin-top:10px !important;}
+	.tabSaldosExtratos thead th {height:20px !important;}
+	.tabSaldosExtratos thead th.celLast div{border-right:none !important;}
+	
+	.tabSaldosExtratos tfoot td {height:15px !important;}
+	.tabGenerica {margin-top:10px !important;}
+	.tabGenerica thead th div,
+	.tabGenerica thead th a {padding:0px 7px 0px 5px !important;}
+	.tabGenerica td {padding-top:5px !important;padding-bottom:5px !important;}
+	.info_tabela {padding:5px 0 5px 0 !important;}
+	.infoConta .legenda {font-size:10px !important; padding-top:0 !important;padding-bottom:0 !important; margin-top:0 !important;}
+	.list_infos li,
+	.lst_infos2Col li,
+	.list_infosFl li,.list_infosAlert li{padding-bottom:3px !important;}
+	
+
+	.infoConta .tabSaldosExtratos th {height:20px!important;}
+	.header_comprovante,
+	.cabecalho_impressao {display:block!important;font-size:1.09em;border-bottom:solid 1px #000000;margin-bottom:5px;}
+	.box_grayLine_bottom {padding:5px 0 !important;}
+	.lstDados li {padding-bottom:5px !important;}
+	.tabNumeracao td span.num, .tabNumeracao td span.num2 {width:18px;height:18px;line-height:18px;}
+	.tabGuia tr {height:20px;}
+	.tabGuia td {padding:0px 10px 0px;}
+
+	.tabela-expansivel .expansor td,
+	.tabela-expansivel .detalhes td {padding:5px 0 5px 10px !important; border-left: 0 !important; border-right: 0 !important;}
+	.tabela-expansivel .spnOrderDesc {display:none;}
+	.tabela-expansivel tr.rowOrdenacao th div {padding:0px 7px 0px 7px; border-left: 0 !important; border-right: 0 !important;}
+	.tabela-expansivel tfoot td,
+	tfoot.tfoot-total td {height:20px;line-height:20px;}
+	.tabComTotal tfoot td {height:25px;}
+
+	.sac ul.list_cols li.sep {margin:0 10px !important; }
+
+	.ico_foto,
+	.ico_comprovante{display:none;}
+
+	.btn_collapse{height:20px; line-height:20px}
+	.btn_collapse em{height:18px;}
+	
+    .preWrap{white-space:pre-line !important;}
+    
+    
+	.float-left{float:left !important;}
+	.float-right{float:right !important;}	
+}
+
+.black{color:black !important;}

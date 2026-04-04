@@ -1,0 +1,526 @@
+$(function(){	    
+    $("input.numeric").live("keyup", function (e) {
+        if (e.which != 9 /* tab */ && e.which != 16 /* shift */ && e.which != 37 /* seta direcional */ && e.which != 38 /* seta direcional */ && e.which != 39 /* seta direcional */ && e.which != 40 /* seta direcional */) {
+            $(this).val($(this).val().replace(/\D/g, ""));
+        }
+    });
+
+	$(".box_degrade").delegate("h3:first","click",function(){
+		$(this).parent("div").toggleClass("bgClass");
+		$(this).next("div").slideToggle() ;
+	});
+	
+	$("#openPagamentoForm").click(function(){
+		controlaExibicaoPagamento();		
+	});
+	
+	$("#tipoPessoa").delegate("input","click",function(){
+		var name = $(this).attr("id");
+		if(name=="rdoPF"){
+			$("#agenciaConta").fadeIn();
+			$("#agenciaContaPJ").hide();
+		}else{
+			$("#agenciaContaPJ").fadeIn();
+			$("#agenciaConta").hide();
+		}
+	});
+    
+	$("#codBarras").hide();
+	$(".btnInternetOutrosBancos").click(function(){
+		$(this).hide();
+		$("#codBarras").fadeIn();
+	});
+	
+	if ($("#showFinanc").val() == 1) {		
+		$('#dialog').jqm({modal : true}); 		
+		$('#dialog').jqmShow(); 
+		if ($("#isFinancPDF").val() != "1") {					
+			if (isContaMultipla() == false) {
+				$('#dialog').jqmAddClose('#btn_euquero');	
+			}
+			$('#dialog').jqmAddClose('#btn_verdepois');
+			$('#dialog').jqmAddClose('#btn_naotenhointeresse');
+		}
+	}
+	
+	$("input").click(function(){		
+		removeErro("agenciaConta");
+	});
+	
+	$("#btn_euquero, #btn_verdepois, #btn_naotenhointeresse").click(function(){
+		actionModal($(this));
+	});
+	
+	
+	$("#btnPagarBoletoPessoaFinanciamento").click(function(){		
+		if ($("input[type=radio]:checked").val() == undefined) {
+			showMensagemErroAgenciaConta("Selecione um opção para pagamento")
+		} else {			
+			if ($("#formIB").attr("action") == "") {
+				showMensagemErroAgenciaConta("A url de refer&ecirc;ncia para o pagamento n&atilde;o foi configurada.")	
+			} else {			
+				financiar();
+				$('#dialog').jqmHide();
+			}
+		}					
+	});
+	
+	$("#btnCancelar").click(function(){
+		$("#btn-opcoes").fadeIn();
+		$("#selecionaConta").hide();		
+	});
+		
+	// FUNÇÕES P/ MODAL
+	// INICIA O PLUG-IN DO MODAL
+	$(".jqmWindow").jqm({
+		onShow: initModal,
+		onHide: exitModal
+	});
+		
+    // CLASSE PARA ABRIR O MODAL AUTOMATICAMENTE
+	$(".openModal:not(.inativo .openModal)").live('click' , function(evt) {
+		$(".jqmWindow").jqmHide();
+		$(this).is("input") ? $($(this).attr("alt")).jqmShow() : $($(this).attr("href")).jqmShow();
+		if($(this).attr("id").length){
+			var id = $(this).attr("id");
+			$('#modalImprimir .bto_imprimir').attr('rel',id);
+		}
+		evt.preventDefault();
+	});
+
+    // CLASSE PARA FECHAR O MODAL
+    $(".closeModal").click(function() {
+        $(this).parents(".jqmWindow").jqmHide();
+        return false;
+    });
+
+	// FECHAR MODAL NO ESC
+	$(document).keypress(function(e){
+		if (e.keyCode == 27) {
+			$(".jqmWindow:visible").jqmHide();
+		}
+	});
+    // FUNÇÕES P/ MODAL
+
+	$('.limpar').click(function() {
+		$('.input_fields li input').attr('value', '');
+		$("#inativo").addClass("inativo");
+		$("#inativo").find('input').attr('disabled', 'disabled');
+		count = 0;
+	});
+	if ($.fn.tooltip) {
+		$(".bTip").tooltip({
+			track: true,
+			delay: 0,
+			showURL: false,
+			showBody: " - ",
+			left: -33,
+			top: 4000
+		});
+	}	
+	$.tabindex();		
+});
+
+$(window).load(function() {
+	
+	$("#openPagamentoForm").trigger("click");
+	
+	//recebe o foco inicial
+    $("#focoInicial").focus();      
+    
+    $("#rdoPJ").click(function(){
+		hideMensagemErroAgenciaConta();		
+	});
+		
+	$(".btnPagarBoletoBradesco").click(function(){
+
+		var documento = $("[name=Documento]").val();
+		var boleto = $("[name=BOLETO]").val();
+		var idPart0 = $("[name=idPart0]").val();
+		var idPart1 = $("[name=idPart1]").val();
+		var idPart2 = $("[name=idPart2]").val();
+		var idPart3 = $("[name=idPart3]").val();
+		var idPart4 = $("[name=idPart4]").val();
+		var idPart5 = $("[name=idPart5]").val();
+		var idPart6 = $("[name=idPart6]").val();
+		var idPart7 = $("[name=idPart7]").val();
+		var idPart8 = $("[name=idPart8]").val();
+				
+		$("[name=BOLETO]").val(linhaBoletoConverteNumero(boleto));
+		$("[name=Documento]").val(linhaBoletoConverteNumero(documento));
+		$("[name=idPart0]").val(linhaBoletoConverteNumero(idPart0));
+		$("[name=idPart1]").val(linhaBoletoConverteNumero(idPart1));
+		$("[name=idPart2]").val(linhaBoletoConverteNumero(idPart2));
+		$("[name=idPart3]").val(linhaBoletoConverteNumero(idPart3));
+		$("[name=idPart4]").val(linhaBoletoConverteNumero(idPart4));
+		$("[name=idPart5]").val(linhaBoletoConverteNumero(idPart5));
+		$("[name=idPart6]").val(linhaBoletoConverteNumero(idPart6));
+		$("[name=idPart7]").val(linhaBoletoConverteNumero(idPart7));
+		$("[name=idPart8]").val(linhaBoletoConverteNumero(idPart8));
+		
+		if($(this).hasClass('fisica')){
+				
+			if(!validaAgencia($("#txtAgencia").val())){
+				showMensagemErroAgenciaConta("Favor preencher o campo ag&ecirc;ncia.");		
+				return;
+			}
+			
+			if(!validaConta($("#txtConta").val())){				
+				showMensagemErroAgenciaConta("Favor preencher o campo conta.");
+				return;
+			}
+			
+			
+			if(!validaDigitoPreenchimento($("#txtConta2").val())){
+				showMensagemErroAgenciaConta("Favor preencher o d&iacute;gito de sua conta.");
+				return;
+			} 
+			
+			if(!validaDigitoModulo11($("#txtConta").val(),$("#txtConta2").val())){
+				showMensagemErroAgenciaConta("D&iacute;gito inv&aacute;lido.");
+				return;
+			}
+								
+			$("#AGN").val($("#txtAgencia").val());
+			$("#CTA").val($("#txtConta").val());
+			$("#DIGCTA").val($("#txtConta2").val());
+			$("#valorPagamento").val(jQuery.trim($("#valorPagamento").val()));
+			
+			$("#formIBPagamento").attr("action",$("#urlPagamentoPessoaFisica").val());
+			$("#formIBPagamento").submit();
+			
+		} else if($(this).hasClass('juridica')){
+			
+			$("#AGN").val($("#txtAgencia").val());
+			$("#CTA").val($("#txtConta").val());
+			$("#DIGCTA").val($("#txtConta2").val());
+			
+			$("#formIBPagamento").attr("action",$("#urlPagamentoPessoaJuridica").val());
+			$("#formIBPagamento").submit();			
+		}
+		
+		$("[name=BOLETO]").val(boleto);
+		$("[name=Documento]").val(documento);
+		$("[name=idPart0]").val(idPart0);
+		$("[name=idPart1]").val(idPart1);
+		$("[name=idPart2]").val(idPart2);
+		$("[name=idPart3]").val(idPart3);
+		$("[name=idPart4]").val(idPart4);
+		$("[name=idPart5]").val(idPart5);
+		$("[name=idPart6]").val(idPart6);
+		$("[name=idPart7]").val(idPart7);
+		$("[name=idPart8]").val(idPart8);
+	});
+	
+    
+});
+
+
+function actionModal($ctrl) {
+	switch($ctrl.attr("id")) {
+    case "btn_euquero":
+    	if (isContaMultipla() == false) {
+    		financiar();	
+    	} else {
+    		showSelecionaConta();
+    	}    	
+        break;    
+    case "btn_naotenhointeresse":
+    	naoMostrar();    	
+        break;
+    case "btn_verdepois":
+    	if ($("#isFinancPDF").val() != "1") {
+    		$('#dialog').jqmHide();
+    	}
+		abrirPDF();
+        break;
+	}		
+}
+
+function abrirPDF() {
+	setTimeout(function() {
+		if ($("#isFinancPDF").val() == "1") {
+			//$("#formPDF").submit();
+			location.href = $("#formPDF").attr("action");
+		}	
+	},100);	
+}
+
+function isContaMultipla() {
+	var conta1 = $("#conta1").val();
+	var conta2 = $("#conta2").val();	
+	return (conta1 != "" && conta2 != "" && conta1 != undefined && conta2 != undefined);
+}
+
+function showSelecionaConta() {
+	$("#btn-opcoes").hide();
+	$("#selecionaConta").fadeIn();
+	$("input[name=rdoConta]").click(function(){
+		if ($(this).attr("id") == "rconta1") {
+			$("#AGN").val($("#agencia1").val());
+			$("#CTA").val($("#conta1").val());
+			$("#DIGCTA").val($("#digito1").val());			
+		} else if ($(this).attr("id") == "rconta2") {
+			$("#AGN").val($("#agencia2").val());
+			$("#CTA").val($("#conta2").val());
+			$("#DIGCTA").val($("#digito2").val());			
+		} 
+	});
+}
+
+function financiar() {	
+	var documento = $("[name=Documento]").val();
+	var EXTRAPARAMS = $("[name=EXTRAPARAMS]").val();
+	var boleto = $("[name=BOLETO]").val();			
+	$("[name=BOLETO]").val(linhaBoletoConverteNumero(boleto));
+	$("[name=Documento]").val(linhaBoletoConverteNumero(documento));
+	$("[name=EXTRAPARAMS]").val(EXTRAPARAMS.replace("[codeImagemRepresentacaoNumerica]",linhaBoletoConverteNumero(documento)));		
+	$("#valorPagamento").val(jQuery.trim($("#valorPagamento").val()));	
+	$("#formIB").submit();	
+	abrirPDF();
+}
+
+function naoMostrar() {
+	var sUrl = $("#urlCancel").val();
+	$.ajax({type: "POST"
+		, url: sUrl
+		, data: {token : $("#token").val(), tokenCliente : $("#tokenCliente").val() }
+		, success: function(result){
+		abrirPDF();
+	}});
+}
+
+function hideMensagemErroAgenciaConta() {	
+	if( $("#agenciaConta").hasClass('form_erro')){
+		$("#agenciaConta").removeClass("form_erro");
+		$("#erroAgenciaContaMSG").html("");
+	}
+}
+function showMensagemErroAgenciaConta(msg) {
+    $("#agenciaConta").addClass("form_erro");
+    $("#erroAgenciaContaMSG").html(msg);
+}
+//Valida agencia
+function validaAgencia(agencia){		
+	if(agencia == "" || isNaN(agencia)){
+		return false;
+	}	
+	return true;
+}
+//valida conta
+function validaConta(conta){
+	if(conta == "" || isNaN(conta)){
+		return false;
+	}
+	return true;
+}
+function validaDigitoPreenchimento(digito){
+	if(digito == "" || isNaN(digito)){
+		return false;
+	}
+	return true;
+}
+//Valida digito modulo 11
+function validaDigitoModulo11(conta, digito) {				
+    var lsoma = 0;
+    var ipeso = 2;
+    var dv_informado = digito;   
+    var dv_conta = conta;
+    var tam =  $.trim(dv_conta).length;;
+    var conta = new Array(tam);    
+    for (i = 0; i <= tam; i++) {
+        conta[i] = dv_conta.substr(i, 1);
+    }
+    while (tam > 0) {
+        digito = conta[--tam];
+        if ((digito >= 0) && (digito <= 9)) {
+            lsoma = lsoma + (digito - 0) * ipeso;
+            ipeso = ipeso + 1;
+            if (ipeso > 7) {
+                ipeso = 2;
+             }
+        }
+    }
+    lsoma %= 11;
+    lsoma = 11 - lsoma;
+    if ((lsoma == 11) || (lsoma == 10)) {
+        lsoma = 0;
+    }
+    if (parseInt(dv_informado) == parseInt(lsoma)) {
+        RetDig = true; 
+    } else {
+        RetDig = false; 
+    }
+    return RetDig;
+}
+
+function calculaDigitoModulo11(conta) {				
+    var digitoCalculado = 0;
+    var ipeso = 2;
+    var digito = 0;   
+    var dv_conta = String(conta);
+    var tam =  $.trim(dv_conta).length;;
+    var conta = new Array(tam);
+    for (i=0; i <= tam; i++) {conta[i] = dv_conta.substr(i, 1);}
+    while (tam > 0) {
+        digito = conta[--tam];
+        if ((digito >= 0) && (digito <= 9)) {
+            digitoCalculado = digitoCalculado + (digito - 0) * ipeso;
+            ipeso = ipeso + 1;
+            if (ipeso > 7) {ipeso = 2;}
+        }
+    }
+    digitoCalculado %= 11;
+    digitoCalculado = 11 - digitoCalculado;
+    if ((digitoCalculado == 11) || (digitoCalculado == 10)) {digitoCalculado = 0;}
+    return digitoCalculado;
+}
+
+//realiza o avanco do campo na digitacao
+function avancaCampo(){	
+	$("#txtAgencia").keypress(function() {
+		hideMensagemErroAgenciaConta();		
+		if($("#txtAgencia").val().length == 4){
+			$("#txtConta").focus();
+		}	
+	});
+	$("#txtAgencia").keyup(function() {
+		if($("#txtAgencia").val().length == 4){
+			$("#txtConta").focus();
+		}	
+	});
+	$("#txtConta").keypress(function() {
+		hideMensagemErroAgenciaConta();
+		if($("#txtConta").val().length == 7){
+			$("#txtConta2").focus();
+		}
+	});
+	$("#txtConta").keyup(function() {
+		if($("#txtConta").val().length == 7){
+			$("#txtConta2").focus();
+		}
+	});  
+	$("#txtConta2").keypress(function() {
+		hideMensagemErroAgenciaConta();		
+	});
+	$("#txtConta2").keyup(function() {
+		if($("#txtConta2").val().length == 1){
+			$("#btnPagarBoletoPessoaFisica").focus();
+		}
+	});  
+}
+
+// AUTO TABINDEX
+$.tabindex = function(v) {
+	v = $.extend({
+		index : 1,
+		linkClass: "tabindex",
+		search: "body"
+	}, v);
+
+	$(v.search + " *").each(function (i){
+		switch (this.tagName.toLowerCase()) {
+			case "a":
+			case "input":
+			case "select":
+			case "textarea":
+				$(this).attr("tabindex", v.index++);
+				break;
+		}
+	});
+};
+
+// FUNÇÕES P/ INICIAR MODAL
+function initModal(hash){
+	var ww = $(window).width();
+	var wh = $(window).height();
+	var mw = hash.w.width();
+	var mh = hash.w.height();
+	var ws = $(window).scrollTop();
+	var x = mw > ww ? 0 : (ww - mw) /2;
+	var y = mh > wh ? (ws) : ws + ((wh - mh) / 2);
+	hash.w.css({
+		top : y,
+		left : x
+	})
+	.fadeIn();
+	$(".hdaMenuLateral").hide();
+	$(".boxHDA").removeClass("boxHDAOn");
+	$(".conteudoHDA:not(#hdaMenuLateral .conteudoHDA, .hdaHome .conteudoHDA)").hide();
+	$(".hdaModalAlterarNome .boxHDA").addClass("boxHDAOn");
+	$(".hdaModalAlterarNome .conteudoHDA").show();
+};
+// FUNÇÕES P/ FINALIZAR MODAL
+function exitModal(hash){
+	hash.o.hide();
+	hash.w.hide();
+	$("#boxRetorno").hide().prev().show();
+	$(".hdaMenuLateral, .hdaMenuLateral .conteudoHDA").show();
+	$(".boxHide", hash.w).show();
+	$(".boxShow", hash.w).hide();
+};
+//gerar arquivo
+function gerarArquivo(tipo, local){
+	var oPrint, html;
+	var top =	'<ul class="list_infos header_comprovante comp_boleto mt15 after"><li class="item pb20"><img height="83" width="107" alt="logo comprovante" id="logoBradesco" src="' + urlPath + '/img/logo_comprovante.gif" />\</li><li class="info pb15"><h2 class="pb15 fn">Bradesco Internet Banking</h2><p class="lh15"><span class="fGray">Data:</span> ' + getDateTime() + ' <br /></p></li></ul><hr style="margin-bottom:20px;"/>';
+	oPrint = "</head><body><div class='boxEstrutura' style='width:725px !important; margin-left:10px; padding:10px;'>";
+    oPrint += top + $("#btn_imprimir").html();    
+    oPrint += "</div></body></html>";  	    
+    html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\" /><html><head><title>Imprime Boleto</title> <link rel='stylesheet' type='text/css' href='" + urlPath + "/css/default.css' media='screen,print' /><link rel='stylesheet' href='" + urlPath + "/css/boleto.css' type='text/css'  />" + oPrint;
+    //envia apenas a url
+    if(tipo == "pdf"){
+    	html = $("#urlBoleto").val();
+    }    
+    $('#tipoArquivo').val(tipo);
+    $('#sourceBoleto').val(html);    
+    try
+    {
+    	var win;
+    	if (local==0){
+    		win = window.open(url,"_blank","width=600px,height=300px,scrollbars=yes ,menubar=no,location=no,left=0,top=0");
+    	} else if (local==1){
+    		win = window.open(url,"width=600px,height=300px,scrollbars=yes ,menubar=no,location=no,left=0,top=0");
+    	}
+        try
+        {
+            win.focus();
+            win.moveTo(100, 100);
+        }catch(e){}
+    }catch(e){}    
+    $('#formFile').submit();
+}
+function showErro(idControle, mensagemErro) {
+    $("#" + idControle).addClass("form_erro");
+    $("#" + idControle + "MSG").html(mensagemErro);
+    $("#" + idControle + "MSG").show();
+}
+function removeErro(idControle) {
+    $("#" + idControle).removeClass("form_erro");
+    $("#" + idControle + "MSG").html("");
+    $("#" + idControle + "MSG").hide();
+    $("#erroAgenciaContaMSG").html("");
+}
+function setNewParamUrl(){
+	if (window.location.href.indexOf("comB") == -1) {	    
+		var hParam = $("#compUrl").val();
+		if(hParam != undefined && hParam != ""){
+			location.hash = "&comB=" + hParam;
+		}
+	}
+}
+function checkImagem(url) {
+	try {
+		var img = '<img src="'+ url +'" />';
+		$(img).load(function() {
+			$("#logoBradesco").attr("src",url);
+		});
+	} catch (e) {}
+}
+function controlaExibicaoPagamento() {
+	if (!$("#tipoPessoa").is(":visible")){
+		$("#tipoPessoa").fadeIn();	
+	} else {
+		$("#tipoPessoa").fadeOut();
+	}
+}
+function linhaBoletoConverteNumero(myString){ if(myString == undefined)return ""; var linha="";var mySplitResult=myString.split(";");for(i=0;i<mySplitResult.length;i++){switch(mySplitResult[i]){case"sscpte":linha+="0";break;case"aosijh":linha+="1";break;case"aimmcc":linha+="2";break;case"ssaabm":linha+="3";break;case"dmmxow":linha+="4";break;case"qaapbq":linha+="5";break;case"rcmpoq":linha+="6";break;case"azpebc":linha+="7";break;case"qapgob":linha+="8";break;case"qaqaqo":linha+="9";break;case"azpiws":linha+=" ";break;case"ssxjop":linha+=".";break;}}return linha;}

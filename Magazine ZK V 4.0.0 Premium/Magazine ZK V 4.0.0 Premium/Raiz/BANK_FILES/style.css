@@ -1,0 +1,548 @@
+body
+{
+	margin: 0px;
+	background-color: #FFF;
+}
+
+#container
+{	
+	height:385px;
+	width:390px;
+	border: 2px;
+	border-style:ridge;
+	margin: auto;
+	--background: #03476D;
+
+}
+
+#subcontainer
+{
+	width: 365px;
+	height: 270px;
+	margin: auto;
+	padding-top: 5px;
+	--background: #03476D;
+}
+
+#header
+{
+	height: 50px;
+	--margin-top: 10px;
+	--margin-left: 5px;
+	--margin-right:5px;
+	padding-right: 10px;
+	padding-top: 5px;
+	background: #fff;
+	--margin-bottom: 0px;
+}
+
+#subheader
+{
+	--background: transparent linear-gradient(135deg, #162963  0%, #2989D8 50%, #67ADEB 100%) repeat scroll 0% 0%;
+	--background: #f99d1c;
+	background: rgb(0,83,166);
+	--background: #023C55;
+}
+
+#infoMsg
+{	
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+}
+
+#infoMsg_SMSToken
+{	
+	padding-top: 10px;
+	padding-bottom: 20px;
+	text-align: center;
+}
+
+#helpMsg
+{	
+	text-align:justify;
+	line-height: 1.1;
+}
+
+#infoData
+{
+	--height: 100px;
+	--width: 365px;
+	--margin: auto;
+	
+	--border-top: 1px;
+	--border-bottom: 1px;
+	--border-left: 0px;
+	--border-right: 0px;
+	--border-style:solid;
+	color: #999;
+	--border-radius: 5px;
+}
+
+#infoFooter
+{
+	padding-top:20px;
+	padding-bottom: 10px;
+	
+	text-align: center;
+	
+	--border: 1px;
+	--border-style:solid;
+}
+
+#boxEnterToken
+{
+	--padding-top: 8px;
+	--padding-bottom: 4px;
+	--background: #E3EBEF;
+	
+	--border: 1px;
+	--border-style:solid;
+}
+
+#buttons
+{
+	
+}
+
+#errorMsg
+{
+	margin: auto;
+	width: 100%;
+	--height: 40px;
+	height: auto;
+	--padding-top: 10px;
+	--padding-bottom: 10px;
+	
+	--border: 1px;
+	--border-style:solid;
+}
+
+#errorMsg_SMS
+{
+	margin: auto;
+	width: 100%;
+	--height: 40px;
+	height: 70px;
+	--padding-top: 10px;
+	--padding-bottom: 10px;
+	
+	--border: 1px;
+	--border-style:solid;
+}
+
+#footer
+{
+	float: right;
+	--padding-right: 15px;
+	--border: 1px;
+	--border-style:solid;
+}
+
+#virtualKeyboard
+{
+	float: center;
+	padding: 1px;
+	text-align: center;
+	border: 1px;
+}
+
+p
+{
+	padding-bottom:1px;
+}
+
+.options-three-buttons
+{
+	margin: auto;
+	width: 68%;
+	text-align: center;
+	--padding: 4px;
+	--padding-left: 40%;
+	
+	--border: 1px;
+	--border-style:solid;
+}
+
+.options-three-buttons_sms
+{
+	margin: auto;
+	width: 62%;
+	text-align: center;
+	--padding: 4px;
+	--padding-left: 40%;
+	
+	--border: 1px;
+	--border-style:solid;
+}
+
+.options-two-buttons
+{
+	margin: auto;
+	width: 48%;
+	text-align: center;
+	padding: 5px;
+	--padding-left: 40%;
+	
+	--border: 1px;
+	--border-style:solid;
+}
+
+.option-one-button
+{
+	margin: auto;
+	width: 100%;
+	text-align: center;	
+}
+
+.options-buttons-width-different
+{
+	margin: auto;
+	width: 65%;
+	padding: 8px;
+	text-align: center;
+	--padding-left: 40%;
+	
+	--border: 1px;
+	--border-style:solid;
+}
+
+.hst_bank_body_1_font
+{
+    font-size: 14px;
+	font-weight:bold;
+    --color: #999;
+	color: #06b;
+	--color: #989285;
+    --font-family: ArialMT,arial,georgia,verdana,geneva;
+	font-family: Calibri,Arial,Verdana,sans-serif;
+    height: 25px;
+}
+
+.hst_bank_body_2_font
+{
+	--font-size: 14px;
+	font-size: 14px;
+	font-weight:normal;
+    --color: #999;
+	color: #06b;
+	--color: #989285;
+    --font-family: ArialMT,arial,georgia,verdana,geneva;
+	font-family: Calibri,Arial,Verdana,sans-serif;
+    height: 25px;
+}
+
+.hst_bank_body_help_font
+{
+	font-size: 13px;
+	font-weight:normal;
+	color: #06b;
+	font-family: Calibri,Arial,Verdana,sans-serif;
+    height: 25px;
+}
+
+.APAGAR_hst_bank_body_2_font
+{
+    font-size: 9pt;
+	--font-weight:bold;
+    color: #66666A;
+    --font-family: ArialMT,arial,georgia,verdana,geneva;
+	font-family: Calibri,Arial,Verdana,sans-serif;
+    --height: 25px;
+}
+
+.hst_bank_body_3_font
+{
+    font-size: 13px;
+	font-weight:normal;
+    --color: #999;
+	color: #06b;
+	--color: #989285;
+    --font-family: ArialMT,arial,georgia,verdana,geneva;
+	font-family: Calibri,Arial,Verdana,sans-serif;
+    height: 25px;
+}
+
+.hst_bank_body_data_table
+{
+	border: 0px;
+	padding: 0px;
+	margin: auto;
+	overflow: hidden;
+    background-color: #FFFFFF;
+	height: 100px;
+	width: 370px;
+}
+
+ .hst_table_content
+{
+	padding: 4px;
+	--border: 1px;
+	margin: 0px; 
+	width: 100%;
+	border-width: 0px;
+	background-color: #E7E7E7;
+	--background-color: #E3EBEF;
+	background-repeat: no-repeat;
+	background-clip: border-box;
+	background-origin: padding-box;
+	background-size: auto auto;
+	background-attachment: scroll;
+	border-radius: 5px;
+	
+}
+
+ .hst_table_content_little
+{
+	padding: 4px;
+	--border: 1px;
+	--margin-bottom: 15px; 
+	width: 100%;
+	border-width: 0px;
+	--background-color: #E7E7E7;
+	background-repeat: no-repeat;
+	background-clip: border-box;
+	background-origin: padding-box;
+	background-size: auto auto;
+	background-attachment: scroll;
+	--border-radius: 5px;
+	
+}
+
+.hst_bank_body_transaction_1_font
+{
+    font-size: 9pt;
+    --color: #989285;
+	color: #CA8D2B;
+    --font-family: ArialMT,arial,georgia,verdana,geneva;
+	font-family: Calibri,Arial,Verdana,sans-serif;
+    --height: 10px;
+	font-weight: bold;
+}
+
+.hst_bank_body_transaction_2_font
+{
+    font-size: 9pt;
+	--font-weight: bold;
+    --color: #4682B4;
+	color: #000;
+    --font-family: ArialMT,arial,georgia,verdana,geneva;
+	font-family: Calibri,Arial,Verdana,sans-serif;
+	font-weight: normal;
+    --height: 10px;
+}
+
+.hst_bank_body_transaction_3_font
+{
+    font-size: 9pt;
+    color: #000;
+	--color: #4682B4;
+    --font-family: ArialMT,arial,georgia,verdana,geneva;
+	font-family: Calibri,Arial,Verdana,sans-serif;
+    --height: 10px;
+	font-weight: bold;
+}
+
+.hst_bank_body_title_font
+{
+    font-size: 9pt;
+	font-weight: bold;
+	color: #06b;
+	--color: #999;
+    --font-family: ArialMT, arial,georgia,verdana, geneva;
+	font-family: Calibri,Arial,Verdana,sans-serif;
+    height: 25px;
+}
+
+.hst_bank_button
+{	
+	height: 33px;
+	color: #fff;
+	--background: #f99d1c;
+	--background: #003da5;
+	background: rgb(0,83,166);
+	text-transform: uppercase;
+	line-height: 33px;
+	border: 0;
+	--display: block;
+	--font-family: 'corisandeboldregular';
+	FONT: bold 11px Calibri,Arial,Helvetica,sans-serif;
+	--font-size: 16px;
+	cursor: pointer;
+	--margin-top: 15px;
+	border-radius: 5px;
+}
+
+.hst_bank_button_orange
+{	
+	height: 33px;
+	color: #fff;
+	background: rgb(242,137,2);
+	text-transform: uppercase;
+	line-height: 33px;
+	border: 0;
+	FONT: bold 11px Calibri,Arial,Helvetica,sans-serif;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.hst_bank_button_2
+{
+
+	--font: bold 0.875em ArialMT,arial,georgia,verdana,geneva;
+	font: bold 0.700em Calibri,arial,georgia,verdana,geneva;
+	text-decoration: none;
+	text-align: center;
+	color: #FFF;
+	backGround-color: #006E92;
+	--background: url('../../images/bg-botton.png');
+	--height: 44px;
+	height: 35px;
+	--width: 80px;
+	cursor:pointer;
+	border: 0px;
+	--border-radius: 5px;
+}
+
+.hst_bank_button_size_more
+{
+	font: bold 10pt Calibri,arial,georgia,verdana,geneva;
+	text-decoration: none;
+	text-align: center;
+	color: #FFF;
+	backGround-color: #075DA1 ;
+	height: 20px;
+	--width: 120px;
+	cursor:pointer;
+	border: 0px;
+}
+
+.linkFormat
+ {
+	font-size: 10pt;
+	--font-weight: bold;
+    --color: #162963;
+	color: #CA8D2B;
+    --font-family: ArialMT, arial, Tahoma, Arial;
+	font-family: Calibri,Arial,Verdana,sans-serif;
+	text-decoration: none;
+    height: 12px;
+ }
+ 
+ .linkFormat:hover
+ {
+	 color: #0060B7;
+ }
+
+h6.step
+{
+	color:#FFF;
+	font-size: 7pt;
+	font-weight: bold;
+	--font-family: ArialMT,arial,georgia,verdana,geneva;
+	font-family: Calibri,Arial,Verdana,sans-serif;
+	font-style: italic;
+	text-align: right;
+	padding: 0px;
+	margin: 0px;
+	margin-right: 5px;
+	--width: 100%;
+} 
+ 
+h6.alert
+{
+    font-size: 9pt;
+	font-weight: normal;
+    --color: #FF0000;
+	color: rgb(242,137,2);
+    --font-family: ArialMT,arial,georgia,verdana,geneva;
+	font-family: Calibri,Arial,Verdana,sans-serif;
+    --height: 18px;
+	--line-height: 25px;
+	text-align: center;
+	padding: 0px;
+	margin: 0px;
+	
+}
+
+input.password
+{
+	padding: 0px 6px;
+	font-size: 1em !important;
+	text-align : center;
+	width: 120px;
+	--height: 35px;
+	border: 1px solid #023C55 !important;
+	color: #999 !important;
+	--text-transform: uppercase;
+}
+
+input.confirmData
+{
+	padding: 0px 6px;
+	font-size: 1em !important;
+	width: 30px;
+	--height: 35px;
+	border: 1px solid #023C55 !important;
+	color: #999 !important;
+	--text-transform: uppercase;
+}
+
+input.sms
+{
+	padding: 0px 6px;
+	font-size: 1.125em !important;
+	width: 80px;
+	height: 35px;
+	border: 1px solid #023C55 !important;
+	color: #446d87 !important;
+	text-transform: uppercase;
+}
+
+.button_keyboard
+{
+	font: bold 9px Calibri,arial,georgia,verdana,geneva;
+	text-decoration: none;
+	text-align: justify;
+	color: #FFF;
+	--backGround-color: #0060B7 ;
+	background: url('../../images/bg-botton.png');
+	--height: 30px;
+	--width: 80px;
+	cursor:pointer;
+	--border: 0px;
+	border:1px solid #cccccc;
+	padding:3px 3px 3px 3px;
+	margin-bottom: 2px;
+	border-radius: 1px;
+}
+
+.oculto 
+{
+	display:none
+}
+
+.login
+{
+	background: #E3EBEF;
+	border-radius: 10px;
+	width: 250px;
+}
+
+.box_sms
+{
+	background: #E3EBEF;
+	border-radius: 10px;
+	width: 370px;
+	height: 100px;
+}
+
+img.right
+{
+	float:right;
+}
+
+img.left
+{
+	float:left;
+}
